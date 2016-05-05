@@ -13,17 +13,16 @@ figure(1)
 step(Gzc)
 hold on
 step(Gc)
-Gw=Gz2Gw(Gz,Ts)
-% denz=Gz.den{1,1}
-% numz=Gz.num{1,1}
-% dent=denz.*[-1 1 -1 1]
-% numt=numz.*[-1 1 -1 1]
-% [numx denx]=bilinear(numt,dent,0.5)
-% Gx=tf(numx,denx)
-% xpara=(Ts/2)*-1
-% numw=[numx].*[xpara^3 xpara^2 xpara 1]
-% denw=[denx].*[xpara^3 xpara^2 xpara 1]
-% Gw=tf(numw,denw)
+denz=Gz.den{1,1}
+numz=Gz.num{1,1}
+dent=denz.*[-1 1 -1 1]
+numt=numz.*[-1 1 -1 1]
+[numx denx]=bilinear(numt,dent,0.5)
+Gx=tf(numx,denx)
+xpara=(Ts/2)*-1
+numw=[numx].*[xpara^3 xpara^2 xpara 1]
+denw=[denx].*[xpara^3 xpara^2 xpara 1]
+Gw=tf(numw,denw)
 Gwc=feedback(Gw,1)
 figure(2)
 bode(Gw)
@@ -78,7 +77,7 @@ step(Gz2KleadK1c)
 % K2=1/0.99
 % Gz2KleadK1K2=GwKlead*Klead2*K1*K2;
 % Gz2KleadK1K2c=feedback(Gz2KleadK1K2,1)
-z=tf('z')
+syms z
 wpara=2/Ts*([(z-1)/(z+1)])
 
 denw=sym(Gz2KleadK1.den{1,1})
@@ -88,12 +87,11 @@ denz=denw.*wpara
 numz=numw.*wpara
 denzarray=sym2cell(denz)
 [denz]=denzarray{1,1:6}
-numzarray=sym2cell(numz)
-[numz]=numzarray{1,1:6}
-
+denzarray=sym2cell(denz)
+[denz]=denzarray{1,1:6}
+z=tf('z')
 denztf=denz
-numztf=numz
-Gz=numztf/denztf
+
 % Gz=numz/denz
 % % Gzc=feedback(Gz,1,1,1,1,1,1)
 % bode(Gz)
