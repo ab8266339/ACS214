@@ -27,7 +27,7 @@ Gw=Gz2Gw(Gz,Ts)
 Gwc=feedback(Gw,1)
 figure(2)
 bode(Gw)
-figure();
+figure(3);
 step(Gwc);
 [Gm,Pm,Wcg,Wcp] = margin(Gw);
 Pm=(60-Pm)+0.1*(60-Pm)
@@ -44,8 +44,8 @@ figure(2)
 GwKleadc=feedback(Gw*Klead,1);
 step(GwKleadc)
 GwKleadcs=step(GwKleadc);
-figure(3)
-findpeaks(GwKleadcs)
+figure();
+findpeaks(GwKleadcs);
 PKS=findpeaks(GwKleadcs);
 [Gm2,Pm2,Wcg2,Wcp2] = margin(GwKlead)
 figure(4)
@@ -75,28 +75,28 @@ Gz2KleadK1=c2d(Gw2KleadK1,Ts,'zoh')
 Gz2KleadK1c=feedback(Gz2KleadK1,1)
 figure(8)
 step(Gz2KleadK1c)
-% K2=1/0.99
-% Gz2KleadK1K2=GwKlead*Klead2*K1*K2;
-% Gz2KleadK1K2c=feedback(Gz2KleadK1K2,1)
-z=tf('z')
-wpara=2/Ts*([(z-1)/(z+1)])
-
-denw=sym(Gz2KleadK1.den{1,1})
-numw=sym(Gz2KleadK1.num{1,1})
-
-denz=denw.*wpara
-numz=numw.*wpara
-denzarray=sym2cell(denz)
-[denz]=denzarray{1,1:6}
-numzarray=sym2cell(numz)
-[numz]=numzarray{1,1:6}
-
-denztf=denz
-numztf=numz
-Gz=numztf/denztf
+K2=1/0.99
+Gz2KleadK1K2=GwKlead*Klead2*K1*K2;
+Gz2KleadK1K2c=feedback(Gz2KleadK1K2,1)
+% z=tf('z')
+% wpara=2/Ts*([(z-1)/(z+1)])
+% 
+% denw=sym(Gz2KleadK1.den{1,1})
+% numw=sym(Gz2KleadK1.num{1,1})
+% 
+% denz=denw.*wpara
+% numz=numw.*wpara
+% denzarray=sym2cell(denz)
+% [denz]=denzarray{1,1:6}
+% numzarray=sym2cell(numz)
+% [numz]=numzarray{1,1:6}
+% 
+% denztf=denz
+% numztf=numz
+% Gz=numztf/denztf
 % Gz=numz/denz
 % % Gzc=feedback(Gz,1,1,1,1,1,1)
 % bode(Gz)
-% Gzz2KleadK1K2c=c2d(Gz2KleadK1K2c,Ts,'zoh')
-% figure(9)
-% step(Gzz2KleadK1K2c)
+Gzz2KleadK1K2c=c2d(Gz2KleadK1K2c,Ts,'zoh')
+figure(9)
+step(Gzz2KleadK1K2c)

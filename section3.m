@@ -2,7 +2,7 @@
 G=tf(684,[1 12 57 0])
 po=10;
 fprintf('selected overshoot 10 percent')
-[dp]=dampingratio(po)
+[dp]=over2damp(po)
 figure(1)
 bode(G)
 fprintf('By looking at bode')
@@ -20,10 +20,10 @@ GKlead=G*Klead
 figure(2)
 GKleadc=feedback(G*Klead,1);
 step(GKleadc)
-GKleadcs=step(GKleadc)
-figure(3)
-findpeaks(GKleadcs)
-PKS=findpeaks(GKleadcs);
+% GKleadcs=step(GKleadc)
+% figure(3)
+% findpeaks(GKleadcs)
+% PKS=findpeaks(GKleadcs);
 [Gm2,Pm2,Wcg2,Wcp2] = margin(GKlead)
 figure(4)
 bode(GKlead)
