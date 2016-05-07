@@ -3,7 +3,7 @@ G=tf(684,[1 12 57 0])
 po=10;
 fprintf('selected overshoot 10 percent')
 [dp]=over2damp(po)
-figure(1)
+figure(1,'')
 bode(G)
 fprintf('By looking at bode')
 [Gm,Pm,Wcg,Wcp] = margin(G);

@@ -44,7 +44,7 @@ figure(2)
 GwKleadc=feedback(Gw*Klead,1);
 step(GwKleadc)
 GwKleadcs=step(GwKleadc);
-figure(3);
+figure();
 findpeaks(GwKleadcs);
 PKS=findpeaks(GwKleadcs);
 [Gm2,Pm2,Wcg2,Wcp2] = margin(GwKlead)
@@ -84,12 +84,12 @@ Gw2KleadK1K2c=feedback(Gw2KleadK1K2,1)
 % z=tf('z')\
 Gz2KleadK1K2=c2d(Gw2KleadK1K2,Ts,'zoh')
 Gz2KleadK1K2c=feedback(Gz2KleadK1K2,1)
-Kzlead1=tf([5063.02 -4936.98],[313.02 -186.98],Ts)
-Kzlead2=tf([868.4 -798.1],[285.15 -214.85],Ts)
+Kzlead1=tf([5063.02 -4936.98],[313.02 -186.98])
+Kzlead2=tf([868.4 -798.1],[285.15 -214.85])
 GzKzlead1Kzlead2=Gz*Kzlead1*Kzlead2
-GzKzlead1Kzlead2c=feedback(GzKzlead1Kzlead2*K1*K2,1)
+Gzc=feedback()
 figure(8)
-step(Gw2KleadK1K2c,Gz2KleadK1K2c,GzKzlead1Kzlead2c)
+step(Gw2KleadK1K2c,Gz2KleadK1K2c)
 % wpara=2/Ts*([(z-1)/(z+1)])
 % denw=sym(Gz2KleadK1.den{1,1})
 % numw=sym(Gz2KleadK1.num{1,1})
