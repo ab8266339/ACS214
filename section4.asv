@@ -79,7 +79,8 @@ figure(8)
 step(Gz2KleadK1c)
 step2=step(Gz2KleadK1c)
 P2=findpeaks(step2)
-K2=1/P2(1)
+K1=1/P2(1)
+K2=1/1.16
 % The K2 was found by using the inverse of the previous step response's peak value
 
 
